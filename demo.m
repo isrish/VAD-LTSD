@@ -1,6 +1,5 @@
 clear 
 close
-addpath('util/');
 %%
 %fn = '/local_scratch/AVDataset/AnnotatedAV/DS2/COUNT_MOVE_OVERLAP_NOCURTAIN_ISRAEL_VINCENT/Audio/COUNT_MOVE_OVERLAP_NOCURTAIN_ISRAEL_VINCENT.wav';
 fn = '/local_scratch/AV16.3/Multiple_SSL/glat.info/ma/av16.3/session11/seq15-1p-0100/16kHz/seq15-1p-0100_array1_mic1.wav';
