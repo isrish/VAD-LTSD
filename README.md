@@ -11,5 +11,5 @@ This repository contains a matlab code impelementation of the VAD based on the f
 ## Usage
   
   Check out demo.m to see how you can use it to segement audio wav file using VAD.
-  More importantly check LTSD.m file to see how the implementend. I tried to put  some referece back to the equations 
+  More importantly check LTSD.m file to see the implementation. I tried to put referece back to the equations 
   on the paper. 
