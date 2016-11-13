@@ -4,7 +4,7 @@
 %   Speech communication 42, no. 3 (2004): 271-287.
 
 % Israel D. Gebru @ INRIA-PERCPETION
-% 2015
+% Oct 2015
 
 classdef LTSD
     properties
@@ -16,6 +16,7 @@ classdef LTSD
         windownum
         alpha
         speechThr
+        firstWindownum
     end
     methods (Access = public)
         function ltsds = compute(obj,signal)
@@ -23,7 +24,7 @@ classdef LTSD
             obj.windownum = size(enframe,2);
             ltsds = zeros(obj.windownum,1);
             %Calculate the average noise spectrum amplitude based on 20 frames in the head parts of input signal.
-            obj.avgnoise = compute_noise_avg_spectrum(obj,signal(1:obj.winsize*20)).^2;
+            obj.avgnoise = compute_noise_avg_spectrum(obj,signal(1:obj.winsize*obj.firstWindownum)).^2;
             for l =1:obj.windownum
                 [obj,ltsds(l)] = ltsd(obj,enframe,l,5);
             end
@@ -61,8 +62,9 @@ classdef LTSD
             end
             res = avgamp./wnum;
         end
-        function obj = LTSD(varargin) %winsize,window,order,adap_rate,threshold
+        function obj = LTSD(varargin) %winsize,window,order,adap_rate,threshold,firstWindownum
             if nargin>3
+                obj.firstWindownum = varargin{6};
                 obj.speechThr = varargin{5};
                 obj.alpha = varargin{4};
             end

@@ -14,15 +14,17 @@ THRESHOLD = -6; % Threshold to update the noise spectrum
 ALPHA = 0.4; % update rate (forgotten factor)
 NORDER = 6; % order
 WINSIZE = 2048; % window size
-WINDOW = hamming(WINSIZE,'symmetric'); % hamming window type
+WINDOW = hamming(WINSIZE,'symmetric'); % hamming window
 ltsd = LTSD(WINSIZE,WINDOW,NORDER,ALPHA,THRESHOLD);
+% if you don't want the noise to be adapted 
+% ltsd = LTSD(WINSIZE,WINDOW,NORDER);
 res =  ltsd.compute(sound);
 %% SHOW RESULT
 USIZE = 4; % to throw away segments which are less that USIZE * WINSIZE
 max_level = max(max(abs(sound)));
 max_level = max_level + 0.01*max_level;
 enframe = buffer(1:length(sound),WINSIZE,round(WINSIZE/2));
-IDX = res>2.5;
+IDX = res>2.5; % speech/non-speech threshold
 d = IDX(2:end) - IDX(1:end-1);
 vadStart = find(d==1);
 vadEnd = find(d==-1);
